@@ -16,3 +16,56 @@ explaination-
 > request- its for Api call
 > ollama- it is for local LLM inteference
 
+### start template
+''' python 
+
+import speech_recognition as sr
+import olama
+
+def listen():
+    recognizer = sr.recognizer()
+    with sr.Microphone() as source:
+         print(" speak now....")
+         audio = recognizer.listen(source)
+    try:
+        text= recognizer.recognize_google(audio)
+        print(f"You said : {text}")
+        return text
+    except sr.UnknownValueError:
+        print(" could not understand audio")
+        return None
+
+def ask_llm(prompt)
+    response = ollama.chat(model="llama3", message=[{"role":"user","content":prompt}])
+    reply = rresponse['message']['content']
+    print(f" ai: {reply}")
+    return reply
+
+from gTTs import gTTs 
+import playsound
+import os 
+
+def speak(text):
+    tts = gTTs (text=text, lang="en")
+    filename = "response.mp3"
+    tts.savefilename()
+    playsound.playsound(filename)
+    os.remove(filename)
+
+def main():
+    print("Voice Assistant Ready! Say 'quit' to exit.")
+    while True:
+        user_input = listen()
+        if not user_input:
+           continue
+        if user_input.lower() in ["quit", "exit", "stop"]:
+            print("Goodbye!")
+            break
+        ai_reply = ask_llm(user_input)
+        speak(ai_reply)
+
+  if _ _name_ _ == "_ _ main_ _":
+       main()
+'''
+
+
